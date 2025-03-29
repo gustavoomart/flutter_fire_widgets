@@ -26,6 +26,13 @@ If you are using any of the editors supported by Flutter a pop-up should appear 
 ```bash
 flutter pub get
 ```
+
+### 3. Use widget's
+To use the widget's you need to import the package to the pages that you will use the **Fire Widget's**:
+```bash
+import 'package:fire_widgets/fire_widgets.dart';
+```
+
 ***
 # Widget's
 
@@ -41,6 +48,9 @@ Use it like any other Flutter widget. But be aware that it is a complete page, s
 Here is an usage example:
 
 ```dart
+import 'package:flutter/material.dart';
+import 'package:fire_widgets/fire_widgets.dart';
+
 void main() {
   runApp(const ExpandableBottomSheetApp());
 }
