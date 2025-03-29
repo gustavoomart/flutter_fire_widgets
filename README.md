@@ -29,7 +29,8 @@ flutter pub get
 ***
 # Widget's
 
-## Expandable Bottom Sheet Page
+<details>
+<summary>## Expandable Bottom Sheet Page</summary>
 
 ### Description
 This widget consists of a complete page, with a body and an expandable bottom menu.
@@ -138,3 +139,4 @@ class ExpandableBottomSheetApp extends StatelessWidget {
   }
 }
 ```
+</details>
