@@ -1,3 +1,7 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+* Initialized the widget's package
+
+## 1.0.1
+
+* Finalized the initial version with one stable widget
