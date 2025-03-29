@@ -11,12 +11,6 @@ A collection of custom widgets for Flutter.
 
 ## ThemeColorsViewerPage
 
-This widget is a full page to visualize in runtime all the theme schema colors, simple use it as a full page and modify the ThemeData properties. For a full example see the /example/lib/theme_colors_viewer_page_example.dart in Example tab.
-
-<p align="center">
-  <img src="assets/ThemeColorsViewers.gif" alt="Theme colors viewer preview"/>
-</p>
-
 | **Description** | **Preview** |
 |-----------------|------------|
 | This widget is a full page to visualize all theme colors. You can modify the `ThemeData` properties to see changes in real-time. It's great for debugging and understanding how colors are used across the app. | <img src="assets/ThemeColorsViewers.gif" alt="Theme colors viewer preview"/> |
