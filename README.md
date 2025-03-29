@@ -17,8 +17,10 @@ A collection of custom widgets for Flutter.
 
 ## ExpandableBottomSheetPage
 
-This widget is a full page widget, that consists of a page body and a bottom sheet menu with header and body. For a full example see the /example/lib/expandable_bottom_sheet_page_example.dart in Example tab.
-
 | **Description** | **Preview** |
 |-----------------|------------|
 | This widget combines a page body with a bottom sheet that expands or collapses with a header and body. It’s perfect for creating pages with expandable menus or extra content. | <img src="assets/ExpandableBottomSheet.gif" alt="Expandable bottom sheet preview"/> |
+
+***
+For more info see (https://pub.dev/packages/fire_widgets);
+For a full usage examples see (https://pub.dev/packages/fire_widgets/example).
