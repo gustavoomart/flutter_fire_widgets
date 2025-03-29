@@ -13,3 +13,7 @@
 ## 1.0.3
 
 * Corrected examples
+
+## 1.0.4
+
+* Add more features for the expandable bottom sheet page

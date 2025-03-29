@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
 class ExpandableBottomSheetPage extends StatefulWidget {
-  /// The total time duration of the bottom sheet animation.
+  /// The total time duration of the bottom sheet animation in miliseconds.
   final int animationDuration;
 
-  /// The margin that the bottom sheet arrow has on the right.
-  final double arrowRightMargin;
+  /// The alignment of the bottom sheet arrow.
+  final Alignment arrowAlignment;
+
+  /// If the bottom sheet has the animated arrow. If set to false ignore others arrow settings.
+  final bool hasArrow;
 
   /// The color of the arrow.
   final Color arrowColor;
@@ -26,7 +29,7 @@ class ExpandableBottomSheetPage extends StatefulWidget {
   /// The icon of arrow.
   final IconData arrowIcon;
 
-  /// The content of the header. The arrow will always be in the right of the header.
+  /// The content of the header. The arrow will always be in the header positioned on the [arrowAlignment].
   final Widget header;
 
   /// The body content of the page.
@@ -38,29 +41,41 @@ class ExpandableBottomSheetPage extends StatefulWidget {
   /// The decorration of the header.
   final Decoration headerDecoration;
 
+  /// The decorration of the header.
+  final Decoration bottomSheetDecoration;
+
   /// The curve easing of bottom sheet animation.
   final Curve animationCurve;
+
+  /// Callback that is triggered on end of the bottom sheet animation,
+  final VoidCallback? onEnd;
 
   const ExpandableBottomSheetPage({
     super.key,
     required this.header,
     required this.body,
     required this.bottomSheetBody,
+    this.hasArrow = true,
     this.arrowIcon = Icons.keyboard_arrow_up,
     this.animationDuration = 400,
-    this.arrowRightMargin = 8,
+    this.arrowAlignment = Alignment.centerRight,
     this.arrowSize = 24,
     this.headerDecoration = const BoxDecoration(
-      color: Colors.white,
+      color: Color.fromARGB(255, 255, 0, 0),
       borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       boxShadow: [
         BoxShadow(color: Colors.black12, blurRadius: 10, offset: Offset(0, -2)),
       ],
     ),
+    this.bottomSheetDecoration = const BoxDecoration(
+      color: Color.fromARGB(255, 255, 107, 107),
+      borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+    ),
     this.arrowColor = Colors.black,
     this.headerHeightPercentage = 0.05,
     this.openedHeightPercentage = 0.5,
-    this.animationCurve = Curves.bounceInOut,
+    this.animationCurve = Curves.bounceOut,
+    this.onEnd,
   });
 
   @override
@@ -81,13 +96,14 @@ class _ExpandableBottomSheetPageState extends State<ExpandableBottomSheetPage> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // Main content of the page
+        /// Main content of the page
         widget.body,
 
-        // Bottom Sheet
+        /// Bottom Sheet
         AnimatedPositioned(
           duration: Duration(milliseconds: widget.animationDuration),
           curve: widget.animationCurve,
+          onEnd: widget.onEnd,
           bottom: 0,
           left: 0,
           right: 0,
@@ -97,12 +113,13 @@ class _ExpandableBottomSheetPageState extends State<ExpandableBottomSheetPage> {
                       widget.openedHeightPercentage
                   : MediaQuery.of(context).size.height *
                       widget.headerHeightPercentage,
-          child: Material(
-            elevation: 10,
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+
+          /// Bottom sheet
+          child: Container(
+            decoration: widget.bottomSheetDecoration,
             child: Column(
               children: [
-                // Sheet header
+                /// Sheet header
                 GestureDetector(
                   onTap: toggleSheet,
                   child: Container(
@@ -114,35 +131,29 @@ class _ExpandableBottomSheetPageState extends State<ExpandableBottomSheetPage> {
                     child: Stack(
                       children: [
                         widget.header,
-                        Positioned(
-                          right: widget.arrowRightMargin,
-                          top: 0,
-                          bottom: 0,
-                          child: AnimatedRotation(
-                            turns: isExpanded ? -0.5 : 0.0,
-                            duration: Duration(
-                              milliseconds: widget.animationDuration,
-                            ),
-                            curve: widget.animationCurve,
-                            child: Icon(
-                              widget.arrowIcon,
-                              color: widget.arrowColor,
-                              size: widget.arrowSize,
+                        if (widget.hasArrow)
+                          Align(
+                            alignment: widget.arrowAlignment,
+                            child: AnimatedRotation(
+                              turns: isExpanded ? -0.5 : 0.0,
+                              duration: Duration(
+                                milliseconds: widget.animationDuration,
+                              ),
+                              curve: widget.animationCurve,
+                              child: Icon(
+                                widget.arrowIcon,
+                                color: widget.arrowColor,
+                                size: widget.arrowSize,
+                              ),
                             ),
                           ),
-                        ),
                       ],
                     ),
                   ),
                 ),
-                Expanded(
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.vertical(
-                      bottom: Radius.circular(16),
-                    ),
-                    child: widget.bottomSheetBody,
-                  ),
-                ),
+
+                /// Sheet content
+                widget.bottomSheetBody,
               ],
             ),
           ),

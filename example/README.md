@@ -3,6 +3,8 @@
 <details>
 <summary>ExpandableBottomSheetPage</summary>
 
+This example show a full possible implementation of the expandable bottom sheet page, you don't need to set all thoes variables, in the example they are setted to the default values. Only required parameters is the body, header and bottomSheetBody:
+
 ```dart
 import 'package:flutter/material.dart';
 import 'package:fire_widgets/fire_widgets.dart';
@@ -27,16 +29,40 @@ class ExpandableBottomSheetAppExample extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const ExpandableBottomSheetPageExample(
-        title: '🔥 Expandable Bottom Sheet Example 🔥',
+      home: ExpandableBottomSheetPageExample(
+        title: '🔥 EXPANDABLE BOTTOM SHEET EXAMPLE 🔥',
       ),
     );
   }
 }
 
-class ExpandableBottomSheetPageExample extends StatelessWidget {
+class ExpandableBottomSheetPageExample extends StatefulWidget {
   const ExpandableBottomSheetPageExample({super.key, required this.title});
   final String title;
+
+  @override
+  State<ExpandableBottomSheetPageExample> createState() => _ExpandableBottomSheetPageExampleState();
+}
+
+class _ExpandableBottomSheetPageExampleState extends State<ExpandableBottomSheetPageExample> {
+  // This is for showcase the onEnd callback feature.
+  bool _showEmoji = true;
+  final Text bodyEmoji = Text(
+    '🔥',
+    style: TextStyle(fontSize: 60),
+  );
+  void _animateFireEmoji() async {
+    const int repeatCount = 10;
+    for (int i = 0; i < repeatCount; i++) {
+      setState(() {
+        _showEmoji = !_showEmoji;
+      });
+      await Future.delayed(const Duration(milliseconds: 100));
+    }
+      setState(() {
+        _showEmoji = true;
+      });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +70,7 @@ class ExpandableBottomSheetPageExample extends StatelessWidget {
       appBar: AppBar(
         title: Center(
           child: Text(
-            title,
+            widget.title,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -56,14 +82,16 @@ class ExpandableBottomSheetPageExample extends StatelessWidget {
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
       ),
       body: ExpandableBottomSheetPage(
-        arrowIcon: Icons.keyboard_arrow_up,
-        animationDuration: 400,
-        animationCurve: Curves.bounceInOut,
+        animationDuration: 1000,
+        animationCurve: Curves.bounceOut,
         headerHeightPercentage: 0.05,
         openedHeightPercentage: 0.5,
-        arrowRightMargin: 8,
+        hasArrow: true,
+        arrowIcon: Icons.keyboard_arrow_up,
+        arrowAlignment: Alignment.centerRight,
         arrowColor: Theme.of(context).colorScheme.onPrimary,
         arrowSize: 24,
+        onEnd: _animateFireEmoji,
         headerDecoration: BoxDecoration(
           color: Theme.of(context).colorScheme.primary,
           borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
@@ -75,12 +103,27 @@ class ExpandableBottomSheetPageExample extends StatelessWidget {
             ),
           ],
         ),
-        body: Center(
-          child: Text(
-            'This is the main content of the page',
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
+        bottomSheetDecoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.inversePrimary,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
         ),
+        body: Stack(
+          children: [
+            // Texto centralizado na tela
+            const Center(
+              child: Text(
+                "This is the content of the page body",
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
+            // Emoji piscante no topo da tela
+            Align(
+              alignment: Alignment(0, -0.6),
+              child: _showEmoji ? bodyEmoji : const SizedBox.shrink(),
+            ),
+          ],
+        ),
+
         header: Center(
           child: Text(
             'THIS IS THE HEADER',
@@ -93,11 +136,11 @@ class ExpandableBottomSheetPageExample extends StatelessWidget {
         ),
         bottomSheetBody: Expanded(
           child: ListView.builder(
-            itemCount: 20,
+            itemCount: 30,
             itemBuilder: (context, index) {
               return ListTile(
                 title: Text(
-                  '🔥 This is the sheet body $index',
+                  '🔥 This is the content of the sheet body $index',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               );
@@ -114,6 +157,7 @@ class ExpandableBottomSheetPageExample extends StatelessWidget {
 
 <details>
 <summary>ThemeColorsViewerPage</summary>
+Simply define your theme first and instantiate the ThemeColorsViewerPage to view all colors with variable names:
 
 ```dart
 import 'package:flutter/material.dart';
