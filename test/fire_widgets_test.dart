@@ -11,9 +11,7 @@ class ExpandableBottomSheetApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = ThemeData(
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: Colors.blue,
-      ),
+      colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
       useMaterial3: true,
     );
 
@@ -21,11 +19,7 @@ class ExpandableBottomSheetApp extends StatelessWidget {
       theme: theme,
       home: Scaffold(
         appBar: AppBar(
-          title: Center(
-            child: Text(
-              'Expandable Bottom Sheet Example',
-            ),
-          ),
+          title: Center(child: Text('Expandable Bottom Sheet Example')),
           backgroundColor: theme.colorScheme.primary,
           foregroundColor: theme.colorScheme.onPrimary,
         ),
@@ -65,10 +59,9 @@ class ExpandableBottomSheetApp extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 color: theme.colorScheme.onPrimary,
               ),
-              
             ),
           ),
-          
+
           bottomSheetBody: Column(
             children: [
               Padding(
