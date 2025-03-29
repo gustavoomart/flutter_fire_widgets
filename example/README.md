@@ -1,7 +1,7 @@
 <h1 align="center">🔥 FIRE WIDGETS EXAMPLES 🔥</h1>
 
 <details>
-<summary><h1>ExpandableBottomSheetPage</h1></summary>
+<summary>ExpandableBottomSheetPage</summary>
 
 ```dart
 import 'package:flutter/material.dart';
@@ -113,7 +113,7 @@ class ExpandableBottomSheetPageExample extends StatelessWidget {
 </details>
 
 <details>
-<summary><h1>ThemeColorsViewerPage</h1></summary>
+<summary>ThemeColorsViewerPage</summary>
 
 ```dart
 import 'package:flutter/material.dart';
