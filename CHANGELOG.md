@@ -9,3 +9,7 @@
 ## 1.0.2
 
 * Added the Theme colors viewer and improving the package in the pub.dev pattern
+
+## 1.0.3
+
+* Corrected examples

@@ -38,7 +38,7 @@ class ExpandableBottomSheetPage extends StatefulWidget {
   /// The decorration of the header.
   final Decoration headerDecoration;
 
-  /// The decorration of the header.
+  /// The curve easing of bottom sheet animation.
   final Curve animationCurve;
 
   const ExpandableBottomSheetPage({
