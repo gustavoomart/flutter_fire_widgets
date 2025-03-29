@@ -1,7 +1,5 @@
 <h1 align="center">🔥 Fire Widget's 🔥</h1>
 
-***
-
 A collection of custom widgets for Flutter.
 
 ## Features
