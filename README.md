@@ -19,7 +19,7 @@ In your `pubspec.yaml` file, add the following dependency:
 dependencies:
   flutter:
     sdk: flutter
-  fire_widgets: ^0.0.1  # Replace with the latest version
+  fire_widgets: ^1.0.1  # Replace with the latest version
 ```
 ### 2. Install dependencies
 If you are using any of the editors supported by Flutter a pop-up should appear to install the dependencies. If not, run the following command in the terminal:
@@ -37,7 +37,7 @@ import 'package:fire_widgets/fire_widgets.dart';
 # Widget's
 
 <details>
-<summary>## Expandable Bottom Sheet Page</summary>
+<summary>Expandable Bottom Sheet Page</summary>
 
 ### Description
 This widget consists of a complete page, with a body and an expandable bottom menu.
