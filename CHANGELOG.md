@@ -17,3 +17,8 @@
 ## 1.0.4
 
 * Add more features for the expandable bottom sheet page
+
+## 1.0.5
+
+* Removed the requirement of header content, and inserted a placeholder while body and bottomSheetBody don't have content
+* Added a new ExpandableCard widget

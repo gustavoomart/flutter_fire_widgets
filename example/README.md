@@ -3,7 +3,7 @@
 <details>
 <summary>ExpandableBottomSheetPage</summary>
 
-This example show a full possible implementation of the expandable bottom sheet page, you don't need to set all thoes variables, in the example they are setted to the default values. Only required parameters is the body, header and bottomSheetBody:
+This example show a full possible implementation of the expandable bottom sheet page, you don't need to set all thoes variables, in the example they are setted to the default values. Only required parameters is the body and bottomSheetBody in order to get content showing, if some is null will have a placeholder in it:
 
 ```dart
 import 'package:flutter/material.dart';
@@ -190,6 +190,162 @@ class ThemeViewerApp extends StatelessWidget {
   }
 }
 
+
+```
+</details>
+
+<details>
+<summary>Expandable Card</summary>
+This widget is a separate card into header and body, you can fully customize both separately, the header is always visible and the body is expanded and collapsed when you click on the header. Here is an example of usage:
+
+```dart
+
+import 'package:flutter/material.dart';
+import 'package:fire_widgets/fire_widgets.dart';
+
+void main() {
+  runApp(const ExpandableCardExampleApp());
+}
+
+class ExpandableCardExampleApp extends StatelessWidget {
+  const ExpandableCardExampleApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Expandable Card App',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.red,
+          brightness: Brightness.dark,
+          dynamicSchemeVariant: DynamicSchemeVariant.fidelity,
+          contrastLevel: 0,
+        ),
+        useMaterial3: true,
+      ),
+      home: const ExpandableCardExamplePage(title: 'Expandable Card Page'),
+    );
+  }
+}
+
+class ExpandableCardExamplePage extends StatefulWidget {
+  const ExpandableCardExamplePage({super.key, required this.title});
+
+  final String title;
+
+  @override
+  State createState() => _ExpandableCardExamplePageState();
+}
+
+class _ExpandableCardExamplePageState extends State<ExpandableCardExamplePage>
+    with SingleTickerProviderStateMixin {
+
+  // All of this initial config is just for showcase the onEnd event
+  // that is called every time the animation end
+  late AnimationController _controller;
+  late Animation<double> _animation;
+  final int _blinkCount = 5;
+  int _currentBlink = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 100),
+      vsync: this,
+    );
+
+    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
+  }
+
+  void _triggerAnimation(bool isExpanded) {
+    _currentBlink = 0;
+    _startBlinking();
+  }
+
+  void _startBlinking() {
+    if (_currentBlink < _blinkCount) {
+      _controller.forward(from: 0.0).then((_) {
+        if (mounted) {
+          _controller.reverse().then((_) {
+            _currentBlink++;
+            _startBlinking();
+          });
+        }
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Center(
+          child: Text(
+            'EXPANDABLE CARD',
+            style: TextStyle(
+              fontSize: 20,
+              color: Theme.of(context).colorScheme.onPrimary,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        foregroundColor: Theme.of(context).colorScheme.onPrimary,
+      ),
+      body: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                ExpandableCard(
+                  cardShape: BeveledRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    side: const BorderSide(color: Colors.red, width: 2),
+                  ),
+                  headerColor: Colors.black,
+                  bodyColor: Colors.grey[900],
+                  header: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        '🔥 HEADER 🔥',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Theme.of(context).colorScheme.primary,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                  body: Container(
+                    padding: const EdgeInsets.only(top: 64, bottom: 64),
+                    child: const Text('This is the body of the card.'),
+                  ),
+                  onEnd: _triggerAnimation,
+                ),
+              ],
+            ),
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: FadeTransition(
+              opacity: _animation,
+              child: const Text('🔥', style: TextStyle(fontSize: 100)),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 ```
 </details>

@@ -30,13 +30,13 @@ class ExpandableBottomSheetPage extends StatefulWidget {
   final IconData arrowIcon;
 
   /// The content of the header. The arrow will always be in the header positioned on the [arrowAlignment].
-  final Widget header;
+  final Widget? header;
 
   /// The body content of the page.
-  final Widget body;
+  final Widget? body;
 
   /// The content of the bottom sheet.
-  final Widget bottomSheetBody;
+  final Widget? bottomSheetBody;
 
   /// The decorration of the header.
   final Decoration headerDecoration;
@@ -52,9 +52,9 @@ class ExpandableBottomSheetPage extends StatefulWidget {
 
   const ExpandableBottomSheetPage({
     super.key,
-    required this.header,
-    required this.body,
-    required this.bottomSheetBody,
+    this.header,
+    this.body,
+    this.bottomSheetBody,
     this.hasArrow = true,
     this.arrowIcon = Icons.keyboard_arrow_up,
     this.animationDuration = 400,
@@ -97,7 +97,7 @@ class _ExpandableBottomSheetPageState extends State<ExpandableBottomSheetPage> {
     return Stack(
       children: [
         /// Main content of the page
-        widget.body,
+        widget.body ?? Placeholder(),
 
         /// Bottom Sheet
         AnimatedPositioned(
@@ -130,7 +130,8 @@ class _ExpandableBottomSheetPageState extends State<ExpandableBottomSheetPage> {
                     decoration: widget.headerDecoration,
                     child: Stack(
                       children: [
-                        widget.header,
+                        if (widget.header != null)
+                          widget.header!,
                         if (widget.hasArrow)
                           Align(
                             alignment: widget.arrowAlignment,
@@ -151,9 +152,8 @@ class _ExpandableBottomSheetPageState extends State<ExpandableBottomSheetPage> {
                     ),
                   ),
                 ),
-
                 /// Sheet content
-                widget.bottomSheetBody,
+                widget.bottomSheetBody ?? Placeholder(),
               ],
             ),
           ),
