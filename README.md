@@ -28,5 +28,7 @@ A collection of custom widgets for Flutter.
 | This widget is a separate card into header and body, you can fully customize both separately, the header is always visible and the body is expanded and collapsed when you click on the header. | <img src="assets/ExpandableCard.gif" alt="Expandable Card preview"/> |
 
 ***
-- For more info see (https://pub.dev/packages/fire_widgets);
-- For a full usage examples see (https://pub.dev/packages/fire_widgets/example).
+- For more info see [pub.dev](https://pub.dev/packages/fire_widgets);
+- For a full usage examples see [examples](https://pub.dev/packages/fire_widgets/example).
+
+- ![GitHub](https://img.shields.io/badge/GitHub-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)[GitHub](https://github.com/gustavoomart)

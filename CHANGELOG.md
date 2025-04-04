@@ -22,3 +22,7 @@
 
 * Removed the requirement of header content, and inserted a placeholder while body and bottomSheetBody don't have content
 * Added a new ExpandableCard widget
+
+## 1.0.6
+
+* Update README
