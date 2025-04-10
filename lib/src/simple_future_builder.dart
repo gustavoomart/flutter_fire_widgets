@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-typedef SnapshotWidgetBuilder<T> = Widget Function(BuildContext context, T data);
+
+typedef SnapshotWidgetBuilder<T> =
+    Widget Function(BuildContext context, T data);
 
 class SimpleFutureBuilder<T> extends StatelessWidget {
   final Future<T> future;
@@ -27,7 +29,8 @@ class SimpleFutureBuilder<T> extends StatelessWidget {
         } else if (snapshot.hasError) {
           return onError?.call(snapshot.error!) ??
               Center(child: Text('Error: ${snapshot.error}'));
-        } else if (!snapshot.hasData || (snapshot.data is List && (snapshot.data as List).isEmpty)) {
+        } else if (!snapshot.hasData ||
+            (snapshot.data is List && (snapshot.data as List).isEmpty)) {
           return onEmpty ?? const Center(child: Text('Nothing to show'));
         } else {
           return onLoaded(context, snapshot.data as T);
