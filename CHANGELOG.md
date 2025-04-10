@@ -30,3 +30,7 @@
 ## 1.0.7
 
 * Added SimpleFutureBuilder widget
+
+## 1.0.8
+
+* Some adjustments
