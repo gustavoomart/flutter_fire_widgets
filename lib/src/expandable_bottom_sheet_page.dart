@@ -130,8 +130,7 @@ class _ExpandableBottomSheetPageState extends State<ExpandableBottomSheetPage> {
                     decoration: widget.headerDecoration,
                     child: Stack(
                       children: [
-                        if (widget.header != null)
-                          widget.header!,
+                        if (widget.header != null) widget.header!,
                         if (widget.hasArrow)
                           Align(
                             alignment: widget.arrowAlignment,
@@ -152,6 +151,7 @@ class _ExpandableBottomSheetPageState extends State<ExpandableBottomSheetPage> {
                     ),
                   ),
                 ),
+
                 /// Sheet content
                 widget.bottomSheetBody ?? Placeholder(),
               ],

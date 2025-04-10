@@ -61,7 +61,6 @@ class ExpandableCard extends StatefulWidget {
   /// Only visible when [elevation] is greater than zero.
   final Color? shadowColor;
 
-
   /// Whether to paint the border in front of the card's child.
   /// If true, the border is painted on top of the child.
   final bool borderOnForeground;
@@ -141,6 +140,7 @@ class ExpandableCard extends StatefulWidget {
   /// Whether this widget should be automatically focused when it appears.
   /// If true, the header will request focus when it's first built.
   final bool autoFocus;
+
   /// A callback that is called when the expansion/colapse animation ends.
   /// The bool isdicates whether the card is expanded (true) or collapsed (false).
   final void Function(bool isExpanded)? onEnd;
@@ -170,7 +170,7 @@ class ExpandableCard extends StatefulWidget {
     this.arrowIcon = Icons.keyboard_arrow_up,
     this.arrowColor,
     this.arrowAlignment = Alignment.centerRight,
-    this.arrowSize = 24, 
+    this.arrowSize = 24,
     this.arrowMargin = const EdgeInsets.only(right: 16.0),
     // Valores padrão para as novas propriedades
     this.highlightColor,
@@ -225,11 +225,14 @@ class _ExpandableCardState extends State<ExpandableCard>
     _controller.dispose();
     super.dispose();
   }
+
   void _animationStatusListener(AnimationStatus status) {
-    if (status == AnimationStatus.completed || status == AnimationStatus.dismissed) {
+    if (status == AnimationStatus.completed ||
+        status == AnimationStatus.dismissed) {
       widget.onEnd?.call(_isExpanded);
     }
   }
+
   void _toggleExpansion() {
     setState(() {
       _isExpanded = !_isExpanded;
@@ -252,8 +255,6 @@ class _ExpandableCardState extends State<ExpandableCard>
 
   @override
   Widget build(BuildContext context) {
-    
-
     return Card(
       color: widget.bodyColor,
       shadowColor: widget.shadowColor,
@@ -289,7 +290,10 @@ class _ExpandableCardState extends State<ExpandableCard>
                 child: Stack(
                   children: [
                     if (widget.header != null)
-                      Padding(padding: widget.padding ?? const EdgeInsets.all(0), child: widget.header),
+                      Padding(
+                        padding: widget.padding ?? const EdgeInsets.all(0),
+                        child: widget.header,
+                      ),
                     if (widget.hasArrow)
                       Positioned.fill(
                         child: Padding(
@@ -329,7 +333,10 @@ class _ExpandableCardState extends State<ExpandableCard>
               },
               child:
                   widget.body != null
-                      ? Padding(padding: widget.padding ?? const EdgeInsets.all(0), child: widget.body)
+                      ? Padding(
+                        padding: widget.padding ?? const EdgeInsets.all(0),
+                        child: widget.body,
+                      )
                       : null,
             ),
           ),

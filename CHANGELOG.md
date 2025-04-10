@@ -26,3 +26,7 @@
 ## 1.0.6
 
 * Update README
+
+## 1.0.7
+
+* Added SimpleFutureBuilder widget

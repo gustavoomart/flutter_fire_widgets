@@ -349,3 +349,72 @@ class _ExpandableCardExamplePageState extends State<ExpandableCardExamplePage>
 
 ```
 </details>
+
+<details>
+<summary>Simple Future Builder</summary>
+This widget simplify the native future builder, it checks the current loading status and place widgets accordingly, the required parameters is future that is the variable to be loaded and onLoaded that is the widget to show after the load is completed. You can optionally customize the onLoading(Progress bar), onEmpty and onError widgets, to display what you want or do some localization on that. Here is an example of usage:
+
+```dart
+
+import 'package:flutter/material.dart';
+import 'package:fire_widgets/fire_widgets.dart';
+
+void main() {
+  runApp(SimpleFutureBuilderApp());
+}
+
+class SimpleFutureBuilderApp extends StatelessWidget {
+  const SimpleFutureBuilderApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.red,
+          brightness: Brightness.dark,
+          dynamicSchemeVariant: DynamicSchemeVariant.fidelity,
+          contrastLevel: 0,
+        ),
+        useMaterial3: true,
+      ),
+
+      title: 'Simple Future Builder Example',
+      home: SimpleFutureBuilderExamplePage(),
+    );
+  }
+}
+
+class SimpleFutureBuilderExamplePage extends StatelessWidget {
+  const SimpleFutureBuilderExamplePage({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Center(child: Text('🔥 Simple Future Builder 🔥')),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        foregroundColor: Theme.of(context).colorScheme.onPrimary,
+      ),
+      body: Center(
+        child: SimpleFutureBuilder<String>(
+          future: getFutureString(),
+          onLoaded: (context, data) {
+            return Text(data);
+          }
+        ),
+      ),
+    );
+  }
+}
+
+Future<String> getFutureString() async {
+  await Future.delayed(Duration(seconds: 10));
+  return 'This makes your code more clean!';
+}
+
+
+```
+</details>
